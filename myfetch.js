@@ -6,9 +6,14 @@ export class myFetch {
   async get() {
     try {
       let response = await fetch(this.url);
-      return await response.json();
+      if(response.status == 200){
+        return await response.json();
+      }
+      else{
+        return await response.status;
+      }
     } catch {
-      alert("Try Again !!");
+      return await response.status;
     }
   }
 
@@ -36,10 +41,14 @@ export class myFetch {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
-      return await response.json();
+      if(response.status == 200){
+        return await response.json();
+      }
+      else{
+        return await response.status;
+      }
     } catch (err) {
-      alert("Try Again !!");
-      console.log(err);
+      return await response.status;
     }
   }
 
@@ -52,9 +61,14 @@ export class myFetch {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
-      return await response.json();
+      if(response.status == 200){
+        return await response.json();
+      }
+      else{
+      return await response.status;
+    }
     } catch (err) {
-      alert("Try Again !!");
+      return await response.status;
     }
   }
 
