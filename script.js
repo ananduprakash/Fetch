@@ -1,5 +1,8 @@
 import { myFetch } from "./myfetch.js";
 
+// Use url = https://jsonplaceholder.typicode.com/posts
+
+
 let urlfield = document.getElementById("url");
 let methodfield = document.getElementById("method");
 let btn = document.getElementById("enter");
@@ -35,15 +38,16 @@ async function main() {
 
   if (fetchmethod == "get") {
     let fetchobj = new myFetch(fetchurl);
+
     table.hidden = false;
     try {
       result = await fetchobj.get();
-
       result.forEach((data) => {
         li += `<tr>
                     <td>${data.id} </td>
                     <td>${data.title}</td>         
                     </tr>`;
+                    console.log(result);
       });
     } catch {
       alert("Try Again");
@@ -101,6 +105,10 @@ async function main() {
       textid.value = "";
       texttitle.value = "";
       editdiv.hidden = true;
+      if(result!=200){
+        alert("Incorrect ID");
+        return;
+      }
       outdiv.textContent = `ID: ${result.id} | Title: ${result.title} >> Modified`;
     };
   } else if (fetchmethod == "patch") {
@@ -122,6 +130,7 @@ async function main() {
       };
 
       result = await fetchobj.patch(newdata);
+      console.log(result);
       textid.value = "";
       texttitle.value = "";
       editdiv.hidden = true;
